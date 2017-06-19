@@ -1,5 +1,5 @@
 <?php
-	// Database wrapper
+	// Database wrapper as a Singleton
 	
 class DB {
 

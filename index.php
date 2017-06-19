@@ -32,14 +32,13 @@
 			width: 100%;
 		}
 
+		table, td, th {
+			border: 1px solid;
+			border-collapse: collapse;
+			/*border-style: solid;
+			border-width: 1px;*/
 
-			table, td, th {
-				border: 1px solid;
-				border-collapse: collapse;
-				/*border-style: solid;
-				border-width: 1px;*/
-
-			}
+		}
 
 
 
