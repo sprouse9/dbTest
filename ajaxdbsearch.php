@@ -30,7 +30,37 @@
 <html>
 	<head>
 		<title></title>
+		<script src="./scripts/jquery-3.2.1.min.js"></script>
 
+		<script>
+			var temp = '';
+
+			function searchDB(event) {
+				temp = event;
+				if(event.length == 0) {
+					return;
+				}
+				else {
+					$.ajax({
+						type: 'POST',
+						url:  '?=searchName',
+						data: {},
+
+
+
+					});
+
+
+
+
+				}
+
+			}
+
+
+
+
+		</script>
 		<style>
 		table {
 			width: 100%;
@@ -51,6 +81,8 @@
 
 	</head>
 <body>
+
+	<label for="searchfield">Search: </label><input type="text" name="searchfield" onkeyup="searchDB(this.value)"><br><br>
 
 
 	<div style="overflow-x:auto;">

@@ -25,8 +25,8 @@ class DB {
 			    printf("Connect failed: %s\n", $this->_conn->connect_error);
 			    exit();
 			}
-			else
-				echo "success!!";
+			// else
+			// 	echo "success!!";
 
 		} catch(mysqli_sql_exception $e) {
 			$e->errorMessage();
