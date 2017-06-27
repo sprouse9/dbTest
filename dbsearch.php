@@ -21,27 +21,6 @@
 		<title></title>
 		<script src="./scripts/jquery-3.2.1.min.js"></script>
 
-		<script>
-			var temp = '';
-
-			function searchDB(event) {
-						temp = event;
-						if(event.length == 0) {
-								return;
-						}
-						else {
-								$.ajax({
-									type: 'POST',
-									url:  'ajaxdbsearch.php?searchName='+event,
-									data: {}
-
-					});
-
-				}
-
-			}
-
-		</script>
 		<style>
 					table {
 						width: 100%;
@@ -50,8 +29,6 @@
 					table, td, th {
 						border: 1px solid;
 						border-collapse: collapse;
-						/*border-style: solid;
-						border-width: 1px;*/
 					}
 		</style>
 
@@ -59,8 +36,8 @@
 	</head>
 <body>
 
-			<label for="searchfield">Search: </label>
-			<input type="text" name="searchName" onkeyup="searchDB(this.value)"><br><br>
+			<label for="searchName">Search: </label>
+			<input type="text" name="searchName"><br><br>
 	
 	<div style="overflow-x:auto;">
 			<table>
@@ -73,6 +50,7 @@
 
 <pre>
 	<?php
+		print_r($_POST);
 		//var_dump($instance);
 		//print_r($employeesResults);
 
