@@ -1,6 +1,6 @@
 <?php
 	// Database wrapper as a Singleton
-	
+
 class DB {
 
 	private static $_instance = null; 	// db instance if available
@@ -44,14 +44,14 @@ class DB {
 	public function query($sql) {
 		$this->_error = false;
 		// try {
-		
+
 		if($this->_results = $this->_conn->query($sql)) {
 
 			$this->_count  = $this->_results->num_rows;
 			$this->_fields = $this->_results->fetch_fields();	// Get field information for all columns
 
 		}
-		
+
 		// } catch {
 
 		// }

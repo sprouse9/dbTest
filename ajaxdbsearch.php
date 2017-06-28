@@ -1,50 +1,28 @@
 <?php
 	require_once 'core/init.php';
 
-	$instance = DB::getInstance();
+	//$instance = DB::getInstance();
 
-	if(!isset($_POST['searchName'])){
-		$searchName = '';
-	}
-	else {
-			$searchName = $_POST['searchName'];
-		}
+	// if(!isset($_POST['searchName'])){
+	// 	$searchName = '';
+	// }
+	// else {
+	// 		$searchName = $_POST['searchName'];
+	// }
 
-	$employeesResults = DB::getInstance()->query("SELECT id, last_name, first_name, email_address FROM employees
-		WHERE first_name LIKE '%{$searchName}%'");
-
+	// $employeesResults = DB::getInstance()->query("SELECT id, last_name, first_name, email_address FROM employees
+	// 	WHERE first_name LIKE '%{$searchName}%'");
 ?>
 
 <!DOCTYPE html>
 <html>
 	<head>
 		<title></title>
-		<script src="./scripts/jquery-3.2.1.min.js"></script>
+		<!-- <script src="./scripts/jquery-3.2.1.min.js"></script> -->
 
-		<script>
-			var temp = '';
-
-			function searchDB(event) {
-						temp = event;
-						if(event.length == 0) {
-								return;
-						}
-						else {
-								$.ajax({
-									type: 'POST',
-									url:  'ajaxdbsearch.php?searchName='+event,
-									data: {}
-
-					});
-
-				}
-
-			}
-
-		</script>
 		<style>
 					table {
-						width: 100%;
+						/*width: 100%;*/
 					}
 
 					table, td, th {
@@ -59,34 +37,41 @@
 	</head>
 <body>
 
-			<label for="searchfield">Search: </label>
-			<input type="text" name="searchName" onkeyup="searchDB(this.value)"><br><br>
-	
-	<div style="overflow-x:auto;">
-			<table>
-				<?php
-						echo $employeesResults->tableHeader();
-						echo $employeesResults->tableBody();
-				?>
-			</table>
-	</div>
+			<p><H2>Welcome to the Employee Search Utility:</H2></p>
+			<label for="searchfield">Search Name: </label>
+			<input id ="searchTextBox" type="text" name="searchName"><br><br>
 
-<pre>
-	<?php
-		//var_dump($instance);
-		//print_r($employeesResults);
-
-	//foreach($employeesResults->results() as $employee) {
-		//echo '<br>-------------------------------------------------<br>';
-		//var_dump( $employee );
-		//echo $employee['first_name'];
-		//print_r($employee);
-
-	//}
-	?>
-</pre>
+			<div id="searchTableResults" style="overflow-x:auto;">
 
 
+			</div>
+
+<script>
+		var url;
+		// When a key is pressed, this function will call
+		// the controller via aJax to update the search results
+		function updateSearchResults() {
+				var divSearchResults = document.getElementById("searchTableResults");
+				var search = document.getElementById("searchTextBox");
+				url = 'displaySearchResults.php?searchName=' + search.value;
+
+				var xhr = new XMLHttpRequest();
+				xhr.open('GET', url, true);
+				xhr.onreadystatechange = function() {
+
+						if(xhr.readyState == 4 && xhr.status == 200) {
+								divSearchResults.innerHTML = xhr.responseText;
+						}
+				}
+				xhr.send();
+		}
+
+		var search = document.getElementById("searchTextBox");
+		search.addEventListener("keyup", updateSearchResults);
+
+		updateSearchResults();
+
+</script>
 
 
 </body>
